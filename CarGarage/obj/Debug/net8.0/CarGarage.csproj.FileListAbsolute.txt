@@ -1,0 +1,14 @@
+D:\cs-vscode\CarGarageManagement\CarGarage\bin\Debug\net8.0\CarGarage.exe
+D:\cs-vscode\CarGarageManagement\CarGarage\bin\Debug\net8.0\CarGarage.deps.json
+D:\cs-vscode\CarGarageManagement\CarGarage\bin\Debug\net8.0\CarGarage.runtimeconfig.json
+D:\cs-vscode\CarGarageManagement\CarGarage\bin\Debug\net8.0\CarGarage.dll
+D:\cs-vscode\CarGarageManagement\CarGarage\bin\Debug\net8.0\CarGarage.pdb
+D:\cs-vscode\CarGarageManagement\CarGarage\obj\Debug\net8.0\CarGarage.GeneratedMSBuildEditorConfig.editorconfig
+D:\cs-vscode\CarGarageManagement\CarGarage\obj\Debug\net8.0\CarGarage.AssemblyInfoInputs.cache
+D:\cs-vscode\CarGarageManagement\CarGarage\obj\Debug\net8.0\CarGarage.AssemblyInfo.cs
+D:\cs-vscode\CarGarageManagement\CarGarage\obj\Debug\net8.0\CarGarage.csproj.CoreCompileInputs.cache
+D:\cs-vscode\CarGarageManagement\CarGarage\obj\Debug\net8.0\CarGarage.dll
+D:\cs-vscode\CarGarageManagement\CarGarage\obj\Debug\net8.0\refint\CarGarage.dll
+D:\cs-vscode\CarGarageManagement\CarGarage\obj\Debug\net8.0\CarGarage.pdb
+D:\cs-vscode\CarGarageManagement\CarGarage\obj\Debug\net8.0\CarGarage.genruntimeconfig.cache
+D:\cs-vscode\CarGarageManagement\CarGarage\obj\Debug\net8.0\ref\CarGarage.dll
