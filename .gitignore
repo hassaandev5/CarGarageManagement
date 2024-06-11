@@ -1,0 +1,3 @@
+# Ignore the bin(Intermediate) and obj(Assembly/native) directories
+**/bin/
+**/obj/
