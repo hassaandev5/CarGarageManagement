@@ -4,8 +4,32 @@ class Program
 {
     static void Main(string[] args)
     {
-        Admin admin1 = new Admin() { Id = 1, Name = "jhon", Password = "123" };
-        Admin admin2 = new Admin() { Id = 2, Name = "aurthor", Password = "456" };
+
+        List<Car> listCars = new List<Car>()
+        {
+            new Car(1, "Honda", "Civic", 2021, "Black"),
+            new Car(2, "Toyota", "Camry", 2022, "White"),
+            new Car(3, "Nissan", "Altima", 2019, "Blue"),
+            new Car(4, "Honda", "Pilot", 2020, "Red"),
+            new Car(5, "Toyota", "Avalon", 2018, "Green") ,
+            new Car(6, "Nissan", "Sentra", 2017, "Yellow"),
+            new Car(7, "Kia", "Sorento", 2016, "Purple"),
+            new Car(8, "Honda", "Fit", 2015, "Orange"),
+            new Car(9, "Toyota", "86", 2014, "Gray"),
+            new Car(10, "Nissan", "GT-R", 2013, "Black"),
+            new Car(11, "Kia", "Optima", 2021, "Black"),
+            new Car(12, "Honda", "HR-V", 2022, "White"),
+            new Car(13, "Nissan", "Micra", 2019, "Blue"),
+            new Car(14, "Toyota", "C-HR", 2020, "Red"),
+            new Car(15, "Kia", "Sportage", 2018, "Green")
+        };
+
+        List<Admin> listAdmins = new List<Admin>()
+        {
+            new Admin(1, "jhon", "123"),
+            new Admin(2, "aurthor", "456")
+        };
+
         int choice;
         do
         {
@@ -21,24 +45,32 @@ class Program
         switch (choice)
         {
             case 1:
-                Console.WriteLine("Enter Your Name: ");
+                // First authorization the admin then bring the admin menu
+
+                // 1. Admin auth
+                Console.WriteLine("Enter your name: ");
                 string? name = Console.ReadLine();
-                if (name == admin1.Name || name == admin2.Name)
+
+                Console.WriteLine("Enter your password: ");
+                string? password = Console.ReadLine();
+
+                Admin? foundPerson = listAdmins.Find(admin => admin.Name == name && admin.Password == password);
+                if (foundPerson != null)
                 {
-                    
-                    Console.WriteLine("Enter Your Password: ");
-                    string? password = Console.ReadLine();
-                    if (name == admin1.Name && password == admin1.Password || name == admin2.Name && password == admin2.Password)
-                    {
-                        Console.WriteLine("Welcome {0} you are recognized as an Admin", name);
-                        return;
-                    }
+                    Console.WriteLine("Welcome {0}", foundPerson.Name);
+
+                    // 2. Admin menu
+                    Admin.AdminMenu();
+
                 }
                 else
                 {
-                    Console.WriteLine("No Admin Found with the Name {0}", name);
+                    Console.WriteLine("Invalid name or password");
                     return;
                 }
+                // 2. Admin menu
+
+
                 // admin.AdminMenu();
                 break;
             case 2:

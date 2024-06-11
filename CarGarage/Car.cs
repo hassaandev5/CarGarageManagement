@@ -2,9 +2,18 @@
 
 public class Car
 {
-    public string? VIN { get; set; }
+    public int Id { get; set; }
     public string? Brand { get; set; }
     public string? Model { get; set; }
     public string? Color { get; set; }
     public int Year { get; set; }
+
+    public Car(int id, string brand, string model, int year, string color )
+    {
+        Id = id;
+        Brand = brand;
+        Model = model;
+        Year = year;
+        Color = color;
+    }
 }
