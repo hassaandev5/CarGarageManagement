@@ -4,6 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
+        Admin admin1 = new Admin() { Id = 1, Name = "jhon", Password = "123" };
+        Admin admin2 = new Admin() { Id = 2, Name = "aurthor", Password = "456" };
         int choice;
         do
         {
@@ -19,7 +21,24 @@ class Program
         switch (choice)
         {
             case 1:
-                Admin admin = new Admin();
+                Console.WriteLine("Enter Your Name: ");
+                string? name = Console.ReadLine();
+                if (name == admin1.Name || name == admin2.Name)
+                {
+                    
+                    Console.WriteLine("Enter Your Password: ");
+                    string? password = Console.ReadLine();
+                    if (name == admin1.Name && password == admin1.Password || name == admin2.Name && password == admin2.Password)
+                    {
+                        Console.WriteLine("Welcome {0} you are recognized as an Admin", name);
+                        return;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No Admin Found with the Name {0}", name);
+                    return;
+                }
                 // admin.AdminMenu();
                 break;
             case 2:
