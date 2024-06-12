@@ -1,89 +1,69 @@
-﻿namespace CarGarage;
+﻿using CarGarage.Models;
+using CarGarage.Services;
+using CarGarage.UI;
+
+namespace CarGarage;
 
 class Program
 {
     static void Main(string[] args)
     {
-
-        List<Car> listCars = new List<Car>()
+        var garage = new Garage();
+        var admins = new List<Admin>
         {
-            new Car(1, "Honda", "Civic", 2021, "Black"),
-            new Car(2, "Toyota", "Camry", 2022, "White"),
-            new Car(3, "Nissan", "Altima", 2019, "Blue"),
-            new Car(4, "Honda", "Pilot", 2020, "Red"),
-            new Car(5, "Toyota", "Avalon", 2018, "Green") ,
-            new Car(6, "Nissan", "Sentra", 2017, "Yellow"),
-            new Car(7, "Kia", "Sorento", 2016, "Purple"),
-            new Car(8, "Honda", "Fit", 2015, "Orange"),
-            new Car(9, "Toyota", "86", 2014, "Gray"),
-            new Car(10, "Nissan", "GT-R", 2013, "Black"),
-            new Car(11, "Kia", "Optima", 2021, "Black"),
-            new Car(12, "Honda", "HR-V", 2022, "White"),
-            new Car(13, "Nissan", "Micra", 2019, "Blue"),
-            new Car(14, "Toyota", "C-HR", 2020, "Red"),
-            new Car(15, "Kia", "Sportage", 2018, "Green")
+            new Admin("admin1", "password1"),
+            new Admin("admin2", "password2")
         };
 
-        List<Admin> listAdmins = new List<Admin>()
+        
+
+        while (true)
         {
-            new Admin(1, "jhon", "123"),
-            new Admin(2, "aurthor", "456")
-        };
+            Console.Clear();
+            Console.WriteLine("Welcome to the garage management app");
+            Console.WriteLine("1. Enter as Admin");
+            Console.WriteLine("2. Enter as Viewer/User");
+            Console.WriteLine("3. Exit");
+            Console.Write("Choose an option: ");
 
-        int choice;
-        do
-        {
-        Console.WriteLine("-------------Car Garage Management-------------");
-        Console.WriteLine("Welcome to the garage management app");
+            var choice = Console.ReadLine();
 
-        Console.WriteLine("1. Enter As an Admin");
-        Console.WriteLine("2. Enter As a User");
-        Console.WriteLine("3. Exit");
-
-        Console.WriteLine("Enter your choice: ");
-        choice = Convert.ToInt32(Console.ReadLine());
-        switch (choice)
-        {
-            case 1:
-                // First authorization the admin then bring the admin menu
-
-                // 1. Admin auth
-                Console.WriteLine("Enter your name: ");
-                string? name = Console.ReadLine();
-
-                Console.WriteLine("Enter your password: ");
-                string? password = Console.ReadLine();
-
-                Admin? foundPerson = listAdmins.Find(admin => admin.Name == name && admin.Password == password);
-                if (foundPerson != null)
-                {
-                    Console.WriteLine("Welcome {0}", foundPerson.Name);
-
-                    // 2. Admin menu
-                    Admin.AdminMenu();
-
-                }
-                else
-                {
-                    Console.WriteLine("Invalid name or password");
+            switch (choice)
+            {
+                case "1":
+                    AdminLogin(admins, garage);
+                    break;
+                case "2":
+                    var viewerInterface = new ViewerInterface(garage);
+                    viewerInterface.ShowMenu();
+                    break;
+                case "3":
                     return;
-                }
-                // 2. Admin menu
-
-
-                // admin.AdminMenu();
-                break;
-            case 2:
-                // User user = new User();
-                // user.UserMenu();
-                break;
-            case 3:
-                break;
-            default:
-                Console.WriteLine("Invalid choice");
-                break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
+            }
         }
+    }
+
+    static void AdminLogin(List<Admin> admins, IGarage garage)
+    {
+        Console.Write("Enter username: ");
+        var username = Console.ReadLine();
+        Console.Write("Enter password: ");
+        var password = Console.ReadLine();
+
+        var admin = admins.Find(a => a.Username == username && a.Authenticate(password));
+
+        if (admin != null)
+        {
+            var adminInterface = new AdminInterface(admin, garage);
+            adminInterface.ShowMenu();
         }
-        while(choice != 3);
+        else
+        {
+            Console.WriteLine("Invalid credentials. Press any key to return to main menu.");
+            Console.ReadKey();
+        }
     }
 }
