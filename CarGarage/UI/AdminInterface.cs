@@ -63,9 +63,9 @@ public class AdminInterface : IUserInterface
         else
         {
             Console.WriteLine("Available cars:");
-            foreach (var car in cars)
+            for (int i = 0; i < cars.Count; i++)
             {
-                Console.WriteLine(car.ToString());
+                Console.WriteLine($"{i}: {cars[i]}");
             }
         }
         Console.WriteLine("Press any key to return to the menu.");
@@ -82,8 +82,10 @@ public class AdminInterface : IUserInterface
         var year = int.Parse(Console.ReadLine());
         Console.Write("Enter color: ");
         var color = Console.ReadLine();
+        Console.Write("Enter price: ");
+        var price = decimal.Parse(Console.ReadLine());
 
-        var car = new Car(brand, model, year, color);
+        var car = new Car(brand, model, year, color, price);
         garage.AddCar(car);
 
         Console.WriteLine("Car added successfully. Press any key to return to the menu.");
@@ -92,31 +94,75 @@ public class AdminInterface : IUserInterface
 
     private void UpdateCar()
     {
-        Console.Write("Enter car index to update: ");
-        var index = int.Parse(Console.ReadLine());
+        ShowAllCarsWithIndexes();
 
-        Console.Write("Enter new brand: ");
-        var brand = Console.ReadLine();
-        Console.Write("Enter new model: ");
-        var model = Console.ReadLine();
-        Console.Write("Enter new year: ");
-        var year = int.Parse(Console.ReadLine());
-        Console.Write("Enter new color: ");
-        var color = Console.ReadLine();
+        Console.Write("Enter the index of the car to update: ");
+        if (int.TryParse(Console.ReadLine(), out int index) && index >= 0 && index < garage.GetAllCars().Count)
+        {
+            var car = garage.GetAllCars()[index];
+            Console.Write($"Enter new brand ({car.Brand}): ");
+            var brand = Console.ReadLine();
+            Console.Write($"Enter new model ({car.Model}): ");
+            var model = Console.ReadLine();
+            Console.Write($"Enter new year ({car.Year}): ");
+            var year = int.Parse(Console.ReadLine());
+            Console.Write($"Enter new color ({car.Color}): ");
+            var color = Console.ReadLine();
+            Console.Write($"Enter new price ({car.Price}): ");
+            var price = decimal.Parse(Console.ReadLine());
 
-        var car = new Car(brand, model, year, color);
-        garage.UpdateCar(index, car);
+            car.Brand = brand;
+            car.Model = model;
+            car.Year = year;
+            car.Color = color;
+            car.Price = price;
 
-        Console.WriteLine("Car updated successfully. Press any key to return to the menu.");
-        Console.ReadKey();
+            Console.WriteLine("Car updated successfully.");
+        }
+        else
+        {
+            Console.WriteLine("Invalid index. Please try again.");
+        }
+        PauseForUser();
     }
 
     private void RemoveCar()
     {
-        Console.Write("Enter car index to remove: ");
-        var index = int.Parse(Console.ReadLine());
-        garage.RemoveCar(index);
-        Console.WriteLine("Car removed successfully. Press any key to return to the menu.");
+        ShowAllCarsWithIndexes();
+
+        Console.Write("Enter the index of the car to remove: ");
+        if (int.TryParse(Console.ReadLine(), out int index) && index >= 0 && index < garage.GetAllCars().Count)
+        {
+            garage.RemoveCar(index);
+            Console.WriteLine("Car removed successfully.");
+        }
+        else
+        {
+            Console.WriteLine("Invalid index. Please try again.");
+        }
+        PauseForUser();
+    }
+
+    private void ShowAllCarsWithIndexes()
+    {
+        var cars = garage.GetAllCars();
+        if (cars.Count == 0)
+        {
+            Console.WriteLine("No cars available.");
+        }
+        else
+        {
+            Console.WriteLine("Available cars:");
+            for (int i = 0; i < cars.Count; i++)
+            {
+                Console.WriteLine($"{i}: {cars[i]}");
+            }
+        }
+    }
+
+    private void PauseForUser()
+    {
+        Console.WriteLine("Press any key to return to the menu.");
         Console.ReadKey();
     }
 }

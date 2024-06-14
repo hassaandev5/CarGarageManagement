@@ -14,6 +14,21 @@ class Program
             new Admin("admin1", "password1"),
             new Admin("admin2", "password2")
         };
+        var stockCars = new List<Car>
+        {
+            new Car("Honda", "civic", 2019, "white", 24000),
+            new Car("Honda", "civic", 2019, "silver", 20000),
+            new Car("Toyota", "corolla", 2020, "red", 23000),
+            new Car("Toyota", "camry", 2021, "black", 28000),
+            new Car("Ford", "mustang", 2022, "blue", 30000),
+            new Car("Ford", "focus", 2023, "green", 25000),
+            new Car("Ford", "chita", 2023, "yellow", 22000),
+        };
+
+        foreach (var car in stockCars)
+        {
+            garage.AddCar(car);
+        }
 
         
 

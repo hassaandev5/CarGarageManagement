@@ -27,6 +27,13 @@ public class Garage : IGarage
             cars.RemoveAt(index);
         }
     }
+    public void BookCar(int index)
+    {
+        if (index >= 0 && index < cars.Count)
+        {
+            cars[index].Booked = true;
+        }
+    }
 
     public List<Car> GetAllCars()
     {
