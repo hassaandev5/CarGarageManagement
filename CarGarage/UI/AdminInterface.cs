@@ -65,7 +65,7 @@ public class AdminInterface : IUserInterface
             Console.WriteLine("Available cars:");
             for (int i = 0; i < cars.Count; i++)
             {
-                Console.WriteLine($"{i}: {cars[i]}");
+                Console.WriteLine($"{cars[i]}");
             }
         }
         Console.WriteLine("Press any key to return to the menu.");
@@ -74,16 +74,29 @@ public class AdminInterface : IUserInterface
 
     private void AddCar()
     {
+        Console.WriteLine("Enter 'abort' at any time to cancel.");
+        
         Console.Write("Enter brand: ");
         var brand = Console.ReadLine();
+        if (brand.ToLower() == "abort") return;
+
         Console.Write("Enter model: ");
         var model = Console.ReadLine();
+        if (model.ToLower() == "abort") return;
+
         Console.Write("Enter year: ");
-        var year = int.Parse(Console.ReadLine());
+        var yearInput = Console.ReadLine();
+        if (yearInput.ToLower() == "abort") return;
+        var year = int.Parse(yearInput);
+
         Console.Write("Enter color: ");
         var color = Console.ReadLine();
+        if (color.ToLower() == "abort") return;
+
         Console.Write("Enter price: ");
-        var price = decimal.Parse(Console.ReadLine());
+        var priceInput = Console.ReadLine();
+        if (priceInput.ToLower() == "abort") return;
+        var price = decimal.Parse(priceInput);
 
         var car = new Car(brand, model, year, color, price);
         garage.AddCar(car);
@@ -96,20 +109,34 @@ public class AdminInterface : IUserInterface
     {
         ShowAllCarsWithIndexes();
 
-        Console.Write("Enter the index of the car to update: ");
-        if (int.TryParse(Console.ReadLine(), out int index) && index >= 0 && index < garage.GetAllCars().Count)
+        Console.Write("Enter the index of the car to update or type 'abort' to cancel: ");
+        var input = Console.ReadLine();
+        if (input.ToLower() == "abort") return;
+
+        if (int.TryParse(input, out int index) && index >= 0 && index < garage.GetAllCars().Count)
         {
             var car = garage.GetAllCars()[index];
             Console.Write($"Enter new brand ({car.Brand}): ");
             var brand = Console.ReadLine();
+            if (brand.ToLower() == "abort") return;
+            
             Console.Write($"Enter new model ({car.Model}): ");
             var model = Console.ReadLine();
+            if (model.ToLower() == "abort") return;
+            
             Console.Write($"Enter new year ({car.Year}): ");
-            var year = int.Parse(Console.ReadLine());
+            var yearInput = Console.ReadLine();
+            if (yearInput.ToLower() == "abort") return;
+            var year = int.Parse(yearInput);
+
             Console.Write($"Enter new color ({car.Color}): ");
             var color = Console.ReadLine();
+            if (color.ToLower() == "abort") return;
+            
             Console.Write($"Enter new price ({car.Price}): ");
-            var price = decimal.Parse(Console.ReadLine());
+            var priceInput = Console.ReadLine();
+            if (priceInput.ToLower() == "abort") return;
+            var price = decimal.Parse(priceInput);
 
             car.Brand = brand;
             car.Model = model;
@@ -130,8 +157,11 @@ public class AdminInterface : IUserInterface
     {
         ShowAllCarsWithIndexes();
 
-        Console.Write("Enter the index of the car to remove: ");
-        if (int.TryParse(Console.ReadLine(), out int index) && index >= 0 && index < garage.GetAllCars().Count)
+        Console.Write("Enter the index of the car to remove or type 'abort' to cancel: ");
+        var input = Console.ReadLine();
+        if (input.ToLower() == "abort") return;
+
+        if (int.TryParse(input, out int index) && index >= 0 && index < garage.GetAllCars().Count)
         {
             garage.RemoveCar(index);
             Console.WriteLine("Car removed successfully.");

@@ -66,7 +66,7 @@ public class ViewerInterface : IUserInterface
         private void BookCar()
         {
             Console.Clear();
-            ShowAllCars(out var cars, out var carIndexMapping, displayIndices: true);
+            ShowAllCars( out var cars, out var carIndexMapping, displayIndices: true);
 
             if (cars.Count == 0)
             {
@@ -75,8 +75,11 @@ public class ViewerInterface : IUserInterface
                 return;
             }
 
-            Console.Write("Enter the index of the car to book: ");
-            if (int.TryParse(Console.ReadLine(), out int index) && carIndexMapping.ContainsKey(index))
+            Console.Write("Enter the index of the car to book or type 'abort' to cancel: ");
+            var input = Console.ReadLine();
+            if (input.ToLower() == "abort") return;
+
+            if (int.TryParse(input, out int index) && carIndexMapping.ContainsKey(index))
             {
                 var carToBook = carIndexMapping[index];
                 if (carToBook.Booked)
