@@ -1,4 +1,4 @@
-namespace CarGarage;
+namespace CarGarage.Interfaces;
 
 public interface IUserInterface
 {

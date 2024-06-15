@@ -1,6 +1,6 @@
 using CarGarage.Models;
 
-namespace CarGarage;
+namespace CarGarage.Interfaces;
 
 public interface IGarage
 {

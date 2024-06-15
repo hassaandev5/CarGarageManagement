@@ -1,6 +1,7 @@
 ﻿using System;
 using CarGarage.Models;
 using CarGarage.Services;
+using CarGarage.Interfaces;
 
 namespace CarGarage.UI;
 
